@@ -13,7 +13,8 @@ import time
 import matplotlib.pyplot as plt
 from scipy import signal
 import pickle
-import cPickle
+import pickle as cPickle
+#import cPickle
 import h5py
 import librosa
 from sklearn import preprocessing
@@ -27,8 +28,8 @@ def create_folder(fd):
         os.makedirs(fd)
         
 def read_audio(path, target_fs=None):
-    print 'file is:'
-    print path
+    print('file is:')
+    print(path)
     (audio, fs) = soundfile.read(path)
     if audio.ndim > 1:
         audio = np.mean(audio, axis=1)
@@ -70,7 +71,7 @@ def create_mixture_csv(args):
     noise_names = [na for na in os.listdir(noise_dir) if na.lower().endswith(".wav")]
     
     speech_rs = np.random.RandomState(10)
-    print int(len(all_speech_names)/speechratio)
+    print(int(len(all_speech_names)/speechratio))
     speech_names = speech_rs.choice(all_speech_names, size=int(len(all_speech_names)/speechratio), replace=False)
 
     rs = np.random.RandomState(0)
@@ -113,7 +114,7 @@ def create_mixture_csv(args):
                 nosie_offset = noise_onset + len_speech
           '''
             if cnt % 100 == 0:
-                print cnt
+                print(cnt)
                 
             cnt += 1
             f.write("%s\t%s\t%d\t%d\n" % (speech_na, noise_na, noise_onset, nosie_offset))
@@ -148,7 +149,7 @@ def calculate_mixture_features(args):
     
     t1 = time.time()
     cnt = 0
-    for i1 in xrange(1, len(lis)):
+    for i1 in range(1, len(lis)):
         [speech_na, noise_na, noise_onset, noise_offset] = lis[i1]
         noise_onset = int(noise_onset)
         noise_offset = int(noise_offset)
@@ -408,17 +409,17 @@ def pack_features(args):
         mixed_x_3d = mat_2d_to_3d(mixed_x, agg_num=n_concat, hop=n_hop)
         x_all.append(mixed_x_3d)
         print ("shape:")
-        print mixed_x.shape
-        print mixed_x_3d.shape
+        print(mixed_x.shape)
+        print(mixed_x_3d.shape)
 
         # Cut target spectrogram and take the center frame of each 3D segment. 
         speech_x_3d = mat_2d_to_3d(speech_x, agg_num=n_concat, hop=n_hop)
         y = speech_x_3d[:, (n_concat - 1) / 2, :]
         y_all.append(y)
         print ("shape:")
-        print speech_x.shape
-        print speech_x_3d.shape
-        print y.shape
+        print(speech_x.shape)
+        print(speech_x_3d.shape)
+        print(y.shape)
     
         # Print. 
         if cnt % 100 == 0:
@@ -471,7 +472,7 @@ def mat_2d_to_3d(x, agg_num, hop):
 def pad_with_border(x, n_pad):
     """Pad the begin and finish of spectrogram with border frame value. 
     """
-    x_pad_list = [x[0:1]] * n_pad + [x] + [x[-1:]] * n_pad
+    x_pad_list = [x[0:1]] * int(n_pad) + [x] + [x[-1:]] * int(n_pad)
     return np.concatenate(x_pad_list, axis=0)
 
 ###

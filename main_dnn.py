@@ -7,7 +7,9 @@ Modified: -
 import numpy as np
 import os
 import pickle
-import cPickle
+#import cPickle
+import pickle
+import pickle as cPickle
 import h5py
 import argparse
 import time
@@ -17,6 +19,7 @@ import matplotlib.pyplot as plt
 import prepare_data as pp_data
 import config as cfg
 from data_generator import DataGenerator
+from evaluate import calculate_pesq
 from spectrogram_to_wave import recover_wav
 
 from keras.layers.normalization import BatchNormalization
@@ -181,7 +184,7 @@ def train(args):
     stat_path = os.path.join(stats_dir, "%diters.p" % iter)
     cPickle.dump(stat_dict, open(stat_path, 'wb'), protocol=cPickle.HIGHEST_PROTOCOL)
     
-    # Train. 
+    # Train. ./models/pretrained/base_dnn_model.h5
     t1 = time.time()
     for (batch_x, batch_y) in tr_gen.generate(xs=[tr_x], ys=[tr_y]):
         loss = model.train_on_batch(batch_x, batch_y)
@@ -203,7 +206,7 @@ def train(args):
         # Save model. 
         if iter % 200 == 0:
             model_path = os.path.join(model_dir, "md_%diters.h5" % iter)
-            print model_path
+            print(model_path)
             #model.save(model_path)
             model.save_weights(model_path)
             print("Saved model to %s" % model_path)
@@ -277,7 +280,8 @@ def inference(args):
 
     # Load model.
     if (model_file=="null"):
-        model_path = os.path.join(workspace, "models", "%ddb" % int(tr_snr), "md_%diters.h5" % iter)
+        model_path = os.path.join("workspace", "models", "%ddb" % int(tr_snr), "md_%diters.h5" % iter)
+        print("||||||||||| model_path model_path model_path model_path model_path model_path :", model_path)
         #model = load_model(model_path)
         model.load_weights(model_path)
     else:

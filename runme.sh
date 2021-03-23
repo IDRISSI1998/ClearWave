@@ -1,5 +1,5 @@
 #!/bin/bash
-
+pip list
 CMD="main_dnn.py"
 
 WORKSPACE="./workspace"
@@ -78,4 +78,6 @@ python evaluate.py calculate_pesq --workspace=$WORKSPACE --speech_dir=$TE_SPEECH
 # Calculate overall stats. 
 echo "Calculate overall stats. "
 python evaluate.py get_stats
+
+cmd /k
 

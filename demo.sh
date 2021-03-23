@@ -4,6 +4,8 @@ CMD="main_dnn.py"
 
 
 MODEL_FILE="./models/pretrained/base_dnn_model.h5"
+#MODEL_FILE="null"
+#MODEL_FILE="./models/pretrained/densenet121_weights_tf_dim_ordering_tf_kernels_changed.h5"
 INPUT_NOISY=1
 
 WORKSPACE="./demo_workspace"
@@ -51,4 +53,5 @@ fi
 echo "Inference, enhanced wavs will be created. "
 CUDA_VISIBLE_DEVICES=0 python $CMD inference --workspace=$WORKSPACE --tr_snr=$TR_SNR --te_snr=$TE_SNR --n_concat=$N_CONCAT --iteration=$ITERATION --calc_log=$CALC_LOG --model_file=$MODEL_FILE
 
+cmd /k
 

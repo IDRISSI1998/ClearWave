@@ -8,7 +8,9 @@ import argparse
 import os
 import csv
 import numpy as np
-import cPickle
+#import cPickle
+import pickle
+import pickle as cPickle
 import matplotlib.pyplot as plt
 
 
@@ -32,7 +34,7 @@ def plot_training_stat(args):
     
     # Load stats. 
     stats_dir = os.path.join(workspace, "training_stats", "%ddb" % int(tr_snr))
-    for iter in xrange(bgn_iter, fin_iter, interval_iter):
+    for iter in range(bgn_iter, fin_iter, interval_iter):
         stats_path = os.path.join(stats_dir, "%diters.p" % iter)
         dict = cPickle.load(open(stats_path, 'rb'))
         tr_losses.append(dict['tr_loss'])
@@ -65,6 +67,7 @@ def calculate_noisy_pesq(args):
     te_snr = args.te_snr
 
     # Remove already existed file.
+    #print("WAAAAAAAAAAAAAAAAAAAAAAAAAAAAHYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", os.getcwd())
     os.system('rm _pesq_itu_results.txt')
     os.system('rm _pesq_results.txt')
 
@@ -126,7 +129,7 @@ def get_stats(args):
         lis = list(reader)
         
     pesq_dict = {}
-    for i1 in xrange(1, len(lis) - 1):
+    for i1 in range(1, len(lis) - 1):
         li = lis[i1]
         na = li[0]
         pesq = float(li[1])
