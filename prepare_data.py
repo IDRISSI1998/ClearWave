@@ -143,7 +143,7 @@ def calculate_mixture_features(args):
     
     # Open mixture csv. 
     mixture_csv_path = os.path.join(workspace, "mixture_csvs", "%s.csv" % data_type)
-    with open(mixture_csv_path, 'rb') as f:
+    with open(mixture_csv_path, 'rt') as f:
         reader = csv.reader(f, delimiter='\t')
         lis = list(reader)
     
@@ -275,11 +275,11 @@ def calculate_noisy_features(args):
             data_type, "%ddb" % int(snr), "%s.p" % na)
         create_folder(os.path.dirname(out_feat_path))
         data = [mixed_complx_x, speech_x, noise_x, alpha, out_bare_na]
-        print (mixed_complx_x.shape)
-        print ("alpha:")
-        print (alpha)
-        print ("out_bare_na:")
-        print (out_bare_na)
+        print(mixed_complx_x.shape)
+        print("alpha:")
+        print(alpha)
+        print("out_bare_na:")
+        print(out_bare_na)
         cPickle.dump(data, open(out_feat_path, 'wb'), protocol=cPickle.HIGHEST_PROTOCOL)
         print(out_feat_path)
         # Print.
@@ -408,15 +408,15 @@ def pack_features(args):
         # Cut input spectrogram to 3D segments with n_concat. 
         mixed_x_3d = mat_2d_to_3d(mixed_x, agg_num=n_concat, hop=n_hop)
         x_all.append(mixed_x_3d)
-        print ("shape:")
+        print("shape:")
         print(mixed_x.shape)
         print(mixed_x_3d.shape)
 
         # Cut target spectrogram and take the center frame of each 3D segment. 
         speech_x_3d = mat_2d_to_3d(speech_x, agg_num=n_concat, hop=n_hop)
-        y = speech_x_3d[:, (n_concat - 1) / 2, :]
+        y = speech_x_3d[:, int((n_concat - 1) / 2), :]
         y_all.append(y)
-        print ("shape:")
+        print("shape:")
         print(speech_x.shape)
         print(speech_x_3d.shape)
         print(y.shape)

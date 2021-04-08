@@ -31,16 +31,16 @@ if [ $CALC_DATA -eq 1 ]; then
   if [ $INPUT_NOISY -eq 0 ]; then
       # Create mixture csv.
       echo "Go:Create mixture csv. "
-      python prepare_data.py create_mixture_csv --workspace=$WORKSPACE --speech_dir=$DEMO_SPEECH_DIR --noise_dir=$DEMO_NOISE_DIR --data_type=test  --speechratio=1
+      python3 prepare_data.py create_mixture_csv --workspace=$WORKSPACE --speech_dir=$DEMO_SPEECH_DIR --noise_dir=$DEMO_NOISE_DIR --data_type=test  --speechratio=1
 
       # Calculate mixture features.
       echo "Go:Calculate mixture features. "
-      python prepare_data.py calculate_mixture_features --workspace=$WORKSPACE --speech_dir=$DEMO_SPEECH_DIR --noise_dir=$DEMO_NOISE_DIR --data_type=test --snr=$TE_SNR
+      python3 prepare_data.py calculate_mixture_features --workspace=$WORKSPACE --speech_dir=$DEMO_SPEECH_DIR --noise_dir=$DEMO_NOISE_DIR --data_type=test --snr=$TE_SNR
   else
       # Calculate noisy features.
       TE_SNR=1000
       echo "Go:Calculate noisy features. "
-      python prepare_data.py calculate_noisy_features --workspace=$WORKSPACE --noisy_dir=$DEMO_NOISY_DIR --data_type=test --snr=$TE_SNR
+      python3 prepare_data.py calculate_noisy_features --workspace=$WORKSPACE --noisy_dir=$DEMO_NOISY_DIR --data_type=test --snr=$TE_SNR
   fi
 
   echo "Data finish!"
@@ -51,7 +51,7 @@ fi
 
 # Inference, enhanced wavs will be created.
 echo "Inference, enhanced wavs will be created. "
-CUDA_VISIBLE_DEVICES=0 python $CMD inference --workspace=$WORKSPACE --tr_snr=$TR_SNR --te_snr=$TE_SNR --n_concat=$N_CONCAT --iteration=$ITERATION --calc_log=$CALC_LOG --model_file=$MODEL_FILE
+CUDA_VISIBLE_DEVICES=0 python3 $CMD inference --workspace=$WORKSPACE --tr_snr=$TR_SNR --te_snr=$TE_SNR --n_concat=$N_CONCAT --iteration=$ITERATION --calc_log=$CALC_LOG --model_file=$MODEL_FILE
 
-cmd /k
+#cmd /k
 

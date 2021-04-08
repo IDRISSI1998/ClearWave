@@ -84,6 +84,7 @@ def calculate_noisy_pesq(args):
 
         # Call executable PESQ tool.
         cmd = ' '.join(["./pesq", speech_path, enh_path, "+16000"])
+        print("haaaaaaahouwa 'cmd' : ", cmd)
         os.system(cmd)
 
 
@@ -103,6 +104,7 @@ def calculate_pesq(args):
     # Remove already existed file. 
     os.system('rm _pesq_itu_results.txt')
     os.system('rm _pesq_results.txt')
+
     
     # Calculate PESQ of all enhaced speech. 
     enh_speech_dir = os.path.join(workspace, "enh_wavs", "test", "%ddb" % int(te_snr))
@@ -124,7 +126,7 @@ def get_stats(args):
     """Calculate stats of PESQ. 
     """
     pesq_path = "_pesq_results.txt"
-    with open(pesq_path, 'rb') as f:
+    with open(pesq_path, 'rt') as f:
         reader = csv.reader(f, delimiter='\t')
         lis = list(reader)
         

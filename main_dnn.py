@@ -91,7 +91,7 @@ def train(args):
     
     batch_size = 128 #128 #500
     print("%d iterations / epoch" % int(tr_x.shape[0] / batch_size))
-    
+    ""
     # Scale data. 
 
     t1 = time.time()
@@ -115,10 +115,12 @@ def train(args):
     print("Scale data time: %s s" % (time.time() - t1,))
         
     # Debug plot. 
-    if False:
+    if True:
+        plt.figure()
         plt.matshow(tr_x[0 : 1000, 0, :].T, origin='lower', aspect='auto', cmap='jet')
         plt.show()
-        pause
+        print("----------------- PLOOOOT SHOOOOWEEED -----------------")
+        #pause
         
     # Build model
     (_, n_concat, n_freq) = tr_x.shape
