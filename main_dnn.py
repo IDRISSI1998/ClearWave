@@ -5,6 +5,7 @@ Created:  2017.12.22
 Modified: -
 """
 import numpy as np
+import random as random
 import os
 import pickle
 #import cPickle
@@ -119,7 +120,9 @@ def train(args):
         plt.figure()
         plt.matshow(tr_x[0 : 1000, 0, :].T, origin='lower', aspect='auto', cmap='jet')
         plt.show()
-        print("----------------- PLOOOOT SHOOOOWEEED -----------------")
+
+        plt.savefig(workspace+'/plot_train_x.png')
+        print("/n/n----------------- PLOOOOT plot_train_x SHOOOOWEEED -----------------/n/n")
         #pause
         
     # Build model
@@ -193,7 +196,7 @@ def train(args):
         iter += 1
         
         # Validate and save training stats. 
-        if iter % 200 == 0:
+        if iter % 100 == 0:
             tr_loss = eval(model, eval_tr_gen, tr_x, tr_y)
             te_loss = eval(model, eval_te_gen, te_x, te_y)
             print("Iteration: %d, tr_loss: %2.20f, te_loss: %2.20f" % (iter, tr_loss, te_loss))
@@ -206,7 +209,7 @@ def train(args):
             cPickle.dump(stat_dict, open(stat_path, 'wb'), protocol=cPickle.HIGHEST_PROTOCOL)
             
         # Save model. 
-        if iter % 200 == 0:
+        if iter % 100 == 0:
             model_path = os.path.join(model_dir, "md_%diters.h5" % iter)
             print(model_path)
             #model.save(model_path)
@@ -355,18 +358,21 @@ def inference(args):
             pred = pred * mixed_x_max
 
         # Debug plot.
-        if args.visualize:
+        if True: #args.visualize:
             fig, axs = plt.subplots(3,1, sharex=False)
             axs[0].matshow(mixed_x.T, origin='lower', aspect='auto', cmap='jet')
-            #axs[1].matshow(speech_x.T, origin='lower', aspect='auto', cmap='jet')
+            axs[1].matshow(speech_x.T, origin='lower', aspect='auto', cmap='jet')
             axs[2].matshow(pred.T, origin='lower', aspect='auto', cmap='jet')
             axs[0].set_title("%ddb mixture log spectrogram" % int(te_snr))
             axs[1].set_title("Clean speech log spectrogram")
             axs[2].set_title("Enhanced speech log spectrogram")
-            for j1 in xrange(3):
+            for j1 in range(3):
                 axs[j1].xaxis.tick_bottom()
             plt.tight_layout()
             plt.show()
+
+            plt.savefig(workspace+'/plot_inference_log_spectrogram' + na + str(random.randint(1, 101)) + '.png')
+            print("\n\n\n\n----------------- PLOOOOT plot_inference_log_spectrogram SHOOOOWEEED -----------------\n\n\n\n")
 
         # Recover enhanced wav.
         if calc_log:
