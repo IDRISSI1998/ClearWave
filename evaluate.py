@@ -14,6 +14,8 @@ import pickle as cPickle
 import matplotlib.pyplot as plt
 
 
+
+
 def plot_training_stat(args):
     """Plot training and testing loss. 
     
@@ -51,11 +53,13 @@ def plot_training_stat(args):
     plt.xticks(np.arange(len(iters)), iters)
     plt.show()
 
+    plt.savefig(workspace+'/plot_training_stat.png')
+
 
 
 
 def calculate_noisy_pesq(args):
-    """Calculate PESQ of all enhaced speech.
+    """Calculate PESQ of all enhanced speech.
 
     Args:
       workspace: str, path of workspace.
@@ -66,10 +70,12 @@ def calculate_noisy_pesq(args):
     speech_dir = args.speech_dir
     te_snr = args.te_snr
 
-    # Remove already existed file.
     #print("WAAAAAAAAAAAAAAAAAAAAAAAAAAAAHYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", os.getcwd())
+
+    # Remove already existed file.
     os.system('rm _pesq_itu_results.txt')
     os.system('rm _pesq_results.txt')
+    os.system('rm ' + workspace + '/' + "mixed_audio" + "_pesq_results.txt")
 
     # Calculate PESQ of all enhaced speech.
     noisy_speech_dir = os.path.join(workspace, "mixed_audios", "spectrogram", "test", "%ddb" % int(te_snr))
@@ -90,7 +96,7 @@ def calculate_noisy_pesq(args):
 
 
 def calculate_pesq(args):
-    """Calculate PESQ of all enhaced speech. 
+    """Calculate PESQ of all enhanced speech.
     
     Args:
       workspace: str, path of workspace. 
@@ -104,9 +110,10 @@ def calculate_pesq(args):
     # Remove already existed file. 
     os.system('rm _pesq_itu_results.txt')
     os.system('rm _pesq_results.txt')
-
+    os.system('rm ' + workspace + '/' + "enhanced_waves" + "_pesq_results.txt")
+    # os.system('rm _pesq_results_enh_wavs.txt')
     
-    # Calculate PESQ of all enhaced speech. 
+    # Calculate PESQ of all enhanced speech.
     enh_speech_dir = os.path.join(workspace, "enh_wavs", "test", "%ddb" % int(te_snr))
     names = os.listdir(enh_speech_dir)
     print(names)
@@ -125,11 +132,23 @@ def calculate_pesq(args):
 def get_stats(args):
     """Calculate stats of PESQ. 
     """
+
+    # pesq_path = workspace + '/' + stats_type + "_pesq_results.txt
     pesq_path = "_pesq_results.txt"
+
+    workspace = args.workspace
+    stats_type = args.type
+
+    with open(pesq_path) as f:
+        with open(workspace + '/' + stats_type + "_pesq_results.txt", "w") as f1:
+            for line in f:
+                f1.write(line)
+
+
     with open(pesq_path, 'rt') as f:
         reader = csv.reader(f, delimiter='\t')
         lis = list(reader)
-        
+
     pesq_dict = {}
     for i1 in range(1, len(lis) - 1):
         li = lis[i1]
@@ -140,7 +159,7 @@ def get_stats(args):
             pesq_dict[noise_type] = [pesq]
         else:
             pesq_dict[noise_type].append(pesq)
-        
+
     avg_list, std_list = [], []
     f = "{0:<16} {1:<16}"
     print(f.format("Noise", "PESQ"))
@@ -178,7 +197,10 @@ if __name__ == '__main__':
     parser_calculate_pesq.add_argument('--te_snr', type=float, required=True)
 
     parser_get_stats = subparsers.add_parser('get_stats')
-    
+    parser_get_stats.add_argument('--workspace', type=str, required=True)
+    parser_get_stats.add_argument('--type', type=str, required=True, choices=["mixed_audio", "enhanced_waves"])
+
+
     args = parser.parse_args()
     
     if args.mode == 'plot_training_stat':
