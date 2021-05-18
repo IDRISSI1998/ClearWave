@@ -30,6 +30,10 @@ llvmlite==0.36.0
 Markdown==3.3.4
 matplotlib==3.4.0
 multidict==5.1.0
+nengo==3.0.0
+nengo-dl==3.4.0
+nengo-gui==0.4.7
+netifaces==0.10.4
 numba==0.53.0
 numpy==1.19.5
 oauthlib==3.1.0
