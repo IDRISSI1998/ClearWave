@@ -24,8 +24,6 @@ CALC_LOG=0
 ITERATION=10000
 #LEARNING_RATE=1e-3
 
-
-
 CALC_DATA=1
 if [ $CALC_DATA -eq 1 ]; then
 
@@ -83,7 +81,7 @@ python3 evaluate.py plot_training_stat --workspace=$WORKSPACE --tr_snr=$TR_SNR -
 # Calculate overall stats.
 echo "Calculate overall stats. "
 python3 evaluate.py get_stats --workspace=$WORKSPACE --type="enhanced_waves"
-
 # done
-
 #cmd /k
+
+
