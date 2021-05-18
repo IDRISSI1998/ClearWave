@@ -88,7 +88,7 @@ The procedure for calculating and storing the weights of your model is as follow
 
 ## Models:
 
-ClearWave model based on simple DNN in keras:
+The ANN model is based on a simple DNN in keras:
 
 ```python
     n_concat = 7
