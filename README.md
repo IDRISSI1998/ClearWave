@@ -6,7 +6,7 @@ Denoise Speech by a Spiking Neural Network converted from an Artificial Neural N
 This work is part of a research project at the engineering faculty of the University of Sherbrooke. This project is carried out by Idrissi Ismail (CIP: idri3201) and supervised by Professor Éric Plourde.
 This project is modified from ClearWave (DNN) by Boozyguo (https://github.com/boozyguo/ClearWave). 
 
-Also, the project uses ffmpeg, webrtc and pesq to deal with speech data.
+Also, the project uses ffmpeg and pesq to deal with speech data.
 
 Before try the project, please download the base dnn model from https://drive.google.com/file/d/1jQjI5IkFq1imAcvAzK_gnE_Q983N9unJ/view?usp=sharing
  and copy the .h5 file to ./models/pretrained/base_dnn_model.h5.
