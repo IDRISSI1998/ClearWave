@@ -30,7 +30,7 @@ pip install -r requirements.txt OR pip3 install -r requirements.txt
 pip install keras
 apt install ffmpeg
 ```
-3. In order to run the code, you must have permission to run the project files. To do this, run the command:
+3. In order to run the code, you must have permission to run the project files. To do this, run the command to the project root directory:
 ```
 chmod -R 755 <directory_name>
 ```
