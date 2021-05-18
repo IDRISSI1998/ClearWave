@@ -13,7 +13,7 @@ Before try the project, please download the base dnn model from https://drive.go
 
 
 ------------------
-Préparation de l'environnement d'éxecution :
+Preparation of the execution environment:
 
 0. The code for this project runs on a Linux system. If you rather have a Windows system, you can follow the necessary instructions on this link https://docs.microsoft.com/en-us/windows/wsl/install-win10 to install a Linux distribution with WSL (Windows Subsystem for Linux ) then continue with the following steps.
 1. Install python. To do this, execute in order the following commands:
