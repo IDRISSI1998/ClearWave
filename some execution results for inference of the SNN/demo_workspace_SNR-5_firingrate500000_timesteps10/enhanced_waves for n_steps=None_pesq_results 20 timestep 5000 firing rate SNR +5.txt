@@ -1,0 +1,20 @@
+DEGRADED	 PESQMOS	 SUBJMOS	 COND	 SAMPLE_FREQ	 CRUDE_DELAY
+D8_770_chinese_male_tchc30_testdata.ch01_dkitchen_noise.5yc4Y.enh.wav	 2.818	 0.000	 0	 16000	8.0000
+ D8_770_chinese_male_tchc30_testdata.ch01_dliving_noise.vTVge.enh.wav	 2.443	 0.000	 0	 16000	0.0000
+ D8_770_chinese_male_tchc30_testdata.ch01_dwashing_noise.5trTK.enh.wav	 2.890	 0.000	 0	 16000	8.0000
+ D8_770_chinese_male_tchc30_testdata.ch01_nfield_noise.43hJl.enh.wav	 2.581	 0.000	 0	 16000	8.0000
+ D8_770_chinese_male_tchc30_testdata.ch01_npark_noise.ObvBs.enh.wav	 2.376	 0.000	 0	 16000	8.0000
+ D8_770_chinese_male_tchc30_testdata.ch01_nriver_noise.2cuDQ.enh.wav	 2.346	 0.000	 0	 16000	0.0000
+ D8_770_chinese_male_tchc30_testdata.ch01_ohallway_noise.x4NQI.enh.wav	 2.212	 0.000	 0	 16000	0.0000
+ D8_770_chinese_male_tchc30_testdata.ch01_omeeting_noise.mMyaO.enh.wav	 2.437	 0.000	 0	 16000	8.0000
+ D8_770_chinese_male_tchc30_testdata.ch01_ooffice_noise.0XIND.enh.wav	 2.867	 0.000	 0	 16000	8.0000
+ D8_770_chinese_male_tchc30_testdata.ch01_pcafeter_noise.2RR0u.enh.wav	 2.393	 0.000	 0	 16000	8.0000
+ D8_770_chinese_male_tchc30_testdata.ch01_presto_noise.wf0kd.enh.wav	 2.267	 0.000	 0	 16000	0.0000
+ D8_770_chinese_male_tchc30_testdata.ch01_pstation_noise.w0iQY.enh.wav	 2.300	 0.000	 0	 16000	8.0000
+ D8_770_chinese_male_tchc30_testdata.ch01_scafe_noise.Nvm9m.enh.wav	 2.221	 0.000	 0	 16000	0.0000
+ D8_770_chinese_male_tchc30_testdata.ch01_spsquare_noise.fk3Vv.enh.wav	 2.326	 0.000	 0	 16000	0.0000
+ D8_770_chinese_male_tchc30_testdata.ch01_straffic_noise.wlj1r.enh.wav	 2.333	 0.000	 0	 16000	0.0000
+ D8_770_chinese_male_tchc30_testdata.ch01_tbus_noise.ejwJz.enh.wav	 2.609	 0.000	 0	 16000	0.0000
+ D8_770_chinese_male_tchc30_testdata.ch01_tcar_noise.LOykM.enh.wav	 2.856	 0.000	 0	 16000	0.0000
+ D8_770_chinese_male_tchc30_testdata.ch01_tmetro_noise.hG1Wl.enh.wav	 2.206	 0.000	 0	 16000	8.0000
+ 
