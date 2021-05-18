@@ -45,8 +45,8 @@ Now your environment is ready to enhance speech!
 ------------------
 
 ## Inference :
+By default, the inference is done by the SNN. You can change the spiking network parameters in the config.py file before running the simulation (changing the firing rate and the number of timesteps). You can change the SNR ratio in the demo.sh file.
 To use the inference with ANN, change the parameter predict_using_snn in config.py file to the value False. 
-By default, the inference is done by the SNN. 
 The procedure for running the inference code to improve your speech is :
 
 ------------------
@@ -120,4 +120,6 @@ ClearWave model based on simple DNN in keras:
 ## Ref:
 
  https://github.com/boozyguo/ClearWave
+ 
+ <p><small>GIN811 - winter2021 - Engineering Faculty - Université de Sherbrooke</small></p>
  
