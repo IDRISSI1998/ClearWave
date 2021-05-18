@@ -1,19 +1,15 @@
 """
 Summary:  Calculate PESQ and overal stats of enhanced speech. 
-Author:   Qiuqiang Kong
-Created:  2017.12.22
+Author:   Qiuqiang Kong & Idrissi Ismail
+Created:  2021.05.18
 Modified: -
 """
 import argparse
 import os
 import csv
 import numpy as np
-#import cPickle
-import pickle
 import pickle as cPickle
 import matplotlib.pyplot as plt
-
-
 
 
 def plot_training_stat(args):
@@ -31,6 +27,7 @@ def plot_training_stat(args):
     bgn_iter = args.bgn_iter
     fin_iter = args.fin_iter
     interval_iter = args.interval_iter
+    n_steps = args.n_steps
 
     tr_losses, te_losses, iters = [], [], []
     
@@ -60,7 +57,6 @@ def plot_training_stat(args):
 
 def calculate_noisy_pesq(args):
     """Calculate PESQ of all enhanced speech.
-
     Args:
       workspace: str, path of workspace.
       speech_dir: str, path of clean speech.
@@ -70,12 +66,9 @@ def calculate_noisy_pesq(args):
     speech_dir = args.speech_dir
     te_snr = args.te_snr
 
-    #print("WAAAAAAAAAAAAAAAAAAAAAAAAAAAAHYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", os.getcwd())
-
     # Remove already existed file.
     os.system('rm _pesq_itu_results.txt')
     os.system('rm _pesq_results.txt')
-    os.system('rm ' + workspace + '/' + "mixed_audio" + "_pesq_results.txt")
 
     # Calculate PESQ of all enhaced speech.
     noisy_speech_dir = os.path.join(workspace, "mixed_audios", "spectrogram", "test", "%ddb" % int(te_snr))
@@ -94,7 +87,6 @@ def calculate_noisy_pesq(args):
         os.system(cmd)
 
 
-
 def calculate_pesq(args):
     """Calculate PESQ of all enhanced speech.
     
@@ -106,17 +98,17 @@ def calculate_pesq(args):
     workspace = args.workspace
     speech_dir = args.speech_dir
     te_snr = args.te_snr
+    n_steps = args.n_steps
     
     # Remove already existed file. 
     os.system('rm _pesq_itu_results.txt')
     os.system('rm _pesq_results.txt')
-    os.system('rm ' + workspace + '/' + "enhanced_waves" + "_pesq_results.txt")
-    # os.system('rm _pesq_results_enh_wavs.txt')
-    
+
     # Calculate PESQ of all enhanced speech.
     enh_speech_dir = os.path.join(workspace, "enh_wavs", "test", "%ddb" % int(te_snr))
     names = os.listdir(enh_speech_dir)
     print(names)
+
     for (cnt, na) in enumerate(names):
         print(cnt, na)
         enh_path = os.path.join(enh_speech_dir, na)
@@ -132,18 +124,16 @@ def calculate_pesq(args):
 def get_stats(args):
     """Calculate stats of PESQ. 
     """
-
-    # pesq_path = workspace + '/' + stats_type + "_pesq_results.txt
     pesq_path = "_pesq_results.txt"
 
     workspace = args.workspace
     stats_type = args.type
+    n_steps = args.n_steps
 
     with open(pesq_path) as f:
-        with open(workspace + '/' + stats_type + "_pesq_results.txt", "w") as f1:
+        with open(workspace + '/' + stats_type + " for n_steps=" + str(n_steps) + "_pesq_results.txt", "w") as f1:
             for line in f:
                 f1.write(line)
-
 
     with open(pesq_path, 'rt') as f:
         reader = csv.reader(f, delimiter='\t')
@@ -165,6 +155,7 @@ def get_stats(args):
     print(f.format("Noise", "PESQ"))
     print("---------------------------------")
     for noise_type in pesq_dict.keys():
+
         pesqs = pesq_dict[noise_type]
         avg_pesq = np.mean(pesqs)
         std_pesq = np.std(pesqs)
@@ -199,7 +190,6 @@ if __name__ == '__main__':
     parser_get_stats = subparsers.add_parser('get_stats')
     parser_get_stats.add_argument('--workspace', type=str, required=True)
     parser_get_stats.add_argument('--type', type=str, required=True, choices=["mixed_audio", "enhanced_waves"])
-
 
     args = parser.parse_args()
     

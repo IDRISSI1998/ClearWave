@@ -2,10 +2,10 @@
 
 CMD="main_dnn.py"
 
-
 MODEL_FILE="./models/pretrained/base_dnn_model.h5"
-#MODEL_FILE="null"
-#MODEL_FILE="./models/pretrained/densenet121_weights_tf_dim_ordering_tf_kernels_changed.h5"
+# MODEL_FILE= "./models/pretrained/base_dnn_model_just_dense_layers.h5"
+# MODEL_FILE="null"
+
 INPUT_NOISY=0 #1
 
 WORKSPACE="./demo_workspace"
@@ -15,16 +15,14 @@ DEMO_NOISE_DIR="./demo_data/noise"
 DEMO_NOISY_DIR="./demo_data/noisy"
 echo "Denoise Demo. "
 
-
-TR_SNR=5
-TE_SNR=5
+TR_SNR=+5 #-5
+TE_SNR=+5 #-5
 N_CONCAT=7
 N_HOP=2
 CALC_LOG=0
 #EPOCHS=10000
 ITERATION=10000
 #LEARNING_RATE=1e-3
-
 
 
 
@@ -66,8 +64,13 @@ fi
 
 # Inference, enhanced wavs will be created.
 echo "Inference, enhanced wavs will be created. "
-CUDA_VISIBLE_DEVICES=0 python3 $CMD inference --workspace=$WORKSPACE --tr_snr=$TR_SNR --te_snr=$TE_SNR --n_concat=$N_CONCAT --iteration=$ITERATION --calc_log=$CALC_LOG --model_file=$MODEL_FILE
 
+# for ((n_steps=1; i<=30; i=i+1))
+# do
+echo "Inference with n_steps : "
+echo $n_steps
+
+CUDA_VISIBLE_DEVICES=0 python3 $CMD inference --workspace=$WORKSPACE --tr_snr=$TR_SNR --te_snr=$TE_SNR --n_concat=$N_CONCAT --iteration=$ITERATION --calc_log=$CALC_LOG --model_file=$MODEL_FILE
 
 # Calculate PESQ of all enhanced speech.
 echo "Calculate PESQ of all enhanced speech. "
@@ -81,5 +84,6 @@ python3 evaluate.py plot_training_stat --workspace=$WORKSPACE --tr_snr=$TR_SNR -
 echo "Calculate overall stats. "
 python3 evaluate.py get_stats --workspace=$WORKSPACE --type="enhanced_waves"
 
+# done
 
 #cmd /k

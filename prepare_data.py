@@ -1,20 +1,19 @@
 """
 Summary:  Prepare data. 
-Author:   Qiuqiang Kong
-Created:  2017.12.22
-Modified: - 
+Author:   Qiuqiang Kong & Idrissi Ismail
+Created:  2017.12.18
+Modified: 2020.05.18
 """
+
 import os
 import soundfile
 import numpy as np
 import argparse
 import csv
 import time
-import matplotlib.pyplot as plt
 from scipy import signal
 import pickle
 import pickle as cPickle
-#import cPickle
 import h5py
 import librosa
 from sklearn import preprocessing
@@ -84,8 +83,8 @@ def create_mixture_csv(args):
     for speech_na in speech_names:
         # Read speech. 
         speech_path = os.path.join(speech_dir, speech_na)
-        #by gm(speech_audio, _) = read_audio(speech_path,target_fs=fs)
-        #by gmlen_speech = len(speech_audio)
+        # by gm(speech_audio, _) = read_audio(speech_path,target_fs=fs)
+        # by gmlen_speech = len(speech_audio)
         
         # For training data, mix each speech with randomly picked #magnification noises. 
         if data_type == 'train':
@@ -98,12 +97,10 @@ def create_mixture_csv(args):
 
         # Mix one speech with different noises many times. 
         for noise_na in selected_noise_names:
-            #by gm noise_path = os.path.join(noise_dir, noise_na)
-            #by gm (noise_audio, _) = read_audio(noise_path,target_fs=fs)
-            
-            #by gm len_noise = len(noise_audio)
-
-            #by gm
+            # by gm noise_path = os.path.join(noise_dir, noise_na)
+            # by gm (noise_audio, _) = read_audio(noise_path,target_fs=fs)
+            # by gm len_noise = len(noise_audio)
+            # by gm
             '''
             if len_noise <= len_speech:
                 noise_onset = 0
@@ -173,7 +170,7 @@ def calculate_mixture_features(args):
             speech_audio = speech_audio_ex[0 : len(noise_audio)]
         # Truncate noise to the same length as speech.
         else:
-            #noise_audio = noise_audio[noise_onset : noise_offset]
+            # noise_audio = noise_audio[noise_onset : noise_offset]
             noise_audio = noise_audio
             speech_audio = speech_audio
         

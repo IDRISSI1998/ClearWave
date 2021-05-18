@@ -16,8 +16,8 @@ TE_SNR=5
 N_CONCAT=7
 N_HOP=2
 CALC_LOG=0
-EPOCHS=10000
-ITERATION=9000
+EPOCHS=1000
+ITERATION=900
 LEARNING_RATE=1e-4
 
 CALC_DATA=1
@@ -75,9 +75,12 @@ CUDA_VISIBLE_DEVICES=0 python3 $CMD inference --workspace=$WORKSPACE --tr_snr=$T
 echo "Calculate PESQ of all enhanced speech. "
 python3 evaluate.py calculate_pesq --workspace=$WORKSPACE --speech_dir=$TE_SPEECH_DIR --te_snr=$TE_SNR
 
+# Plot_training_stat.
+echo "Plot_training_stat. "
+python3 evaluate.py plot_training_stat --workspace=$WORKSPACE --tr_snr=$TR_SNR --bgn_iter=0 --fin_iter=$ITERATION --interval_iter=100
+
 # Calculate overall stats. 
 echo "Calculate overall stats. "
-python3 evaluate.py get_stats
+python3 evaluate.py get_stats --workspace=$WORKSPACE --type="enhanced_waves"
 
 #cmd /k
-
